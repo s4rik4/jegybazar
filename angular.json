@@ -8,53 +8,7 @@
       "sourceRoot": "src",
       "projectType": "application",
       "prefix": "app",
-      "schematics": {
-        "@schematics/angular:component": {
-          "changeDetection": "Default",
-          "export": false,
-          "flat": false,
-          "inlineStyle": false,
-          "inlineTemplate": false,
-          "module": "",
-          "prefix": "",
-          "selector": "",
-          "skipImport": false,
-          "spec": true,
-          "styleext": "css",
-          "viewEncapsulation": "Emulated"
-        },
-        "@schematics/angular:module": {
-          "commonModule": true,
-          "flat": false,
-          "module": "",
-          "routing": false,
-          "routingScope": "Child",
-          "spec": true
-        },
-        "@schematics/angular:service": {
-          "flat": true,
-          "spec": true
-        },
-        "@schematics/angular:pipe": {
-          "export": false,
-          "flat": true,
-          "module": "",
-          "skipImport": false,
-          "spec": true
-        },
-        "@schematics/angular:directive": {
-          "export": false,
-          "flat": true,
-          "module": "",
-          "prefix": "app",
-          "selector": "",
-          "skipImport": false,
-          "spec": true
-        },
-        "@schematics/angular:class": {
-          "spec": true
-        }
-      },
+      "schematics": {},
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
