@@ -9,6 +9,8 @@ import {LoginComponent} from './login/login.component';
 import {RegistrationComponent} from './registration/registration.component';
 import {EventListComponent} from './event-list/event-list.component';
 import {EventDetailComponent} from './event-detail/event-detail.component';
+import {ProfileComponent} from './profile/profile.component';
+import {ProfileEditComponent} from './profile-edit/profile-edit.component';
 
 const routes: Routes = [
   {path: 'home', component: HomeComponent},
@@ -22,6 +24,10 @@ const routes: Routes = [
   {path: 'about', component: AboutComponent},
   {path: 'login', component: LoginComponent},
   {path: 'registration', component: RegistrationComponent},
+  {path: 'user', children: [
+      {path: '', component: ProfileComponent},
+      {path: 'edit', component: ProfileEditComponent},
+    ]},
   {path: '', redirectTo: '/home', pathMatch: 'full'},
   {path: '**', component: PageNotFoundComponent}
 
@@ -42,6 +48,8 @@ export class AppRoutingModule {
     TicketComponent,
     AboutComponent,
     LoginComponent,
-    RegistrationComponent
+    RegistrationComponent,
+    ProfileComponent,
+    ProfileEditComponent
   ];
 }
