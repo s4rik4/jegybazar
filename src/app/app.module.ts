@@ -8,7 +8,6 @@ import { JumbotronComponent } from './core/jumbotron/jumbotron.component';
 import { EventcardComponent } from './event/eventcard/eventcard.component';
 import { FooterComponent } from './core/footer/footer.component';
 import { AppRoutingModule} from './app-routing.module';
-import { BidComponent } from './bid/bid.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +17,6 @@ import { BidComponent } from './bid/bid.component';
     EventcardComponent,
     FooterComponent,
     ...AppRoutingModule.routableComponents,
-    BidComponent
   ],
   imports: [
     BrowserModule,
