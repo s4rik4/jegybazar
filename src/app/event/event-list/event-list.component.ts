@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {EventService} from '../../shared/event.service';
 import {EventModel} from '../../shared/event-model';
+import {current} from 'codelyzer/util/syntaxKind';
 
 @Component({
   selector: 'app-event-list',
@@ -9,14 +10,22 @@ import {EventModel} from '../../shared/event-model';
 })
 export class EventListComponent implements OnInit {
 // ez jó példa lehet a smart és dumb componentre
-  public events: EventModel[];
+  public eventsGrouppedBy3: EventModel[];
 
   constructor(private _eventService: EventService) {
-    this.events = this._eventService.getAllEvents();
-    console.log(this.events);
   }
 
   ngOnInit() {
+    // tömbök széosztása hátmasával
+    this.eventsGrouppedBy3 = this._eventService.getAllEvents()
+      .reduce((acc, curr: EventModel, ind: number) => {
+      if(ind % 3 === 0) {
+        acc.push([]);
+      }
+        acc[acc.length - 1].push(curr);
+        return acc;
+      }, []);
+    console.log(this.eventsGrouppedBy3);
   }
 
 }
