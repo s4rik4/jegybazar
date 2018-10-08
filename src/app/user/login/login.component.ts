@@ -16,8 +16,11 @@ export class LoginComponent implements OnInit {
   }
 
   login(email: string, password: string) {
-    if (this._userService.login(email, password)) {
-      this.error = 'Hiba a belépési adatokban. Próbáld Újra te kics huncut...';
+    if (!this._userService.login(email, password)) {
+      this.error = 'Hiba a belépési adatokban. Próbáld újra te kis huncut...';
     }
+  }
+  clearError() {
+    delete(this.error);
   }
 }

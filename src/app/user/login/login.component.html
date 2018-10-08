@@ -6,7 +6,13 @@
     <div class="col-10 col-sm-8 col-md-6 col-lg-4">
 
       <!-- Alert message. -->
-      <alert type="danger" dismissible="dismissible"><strong>Szent habakukk Micimakcó!</strong></alert>
+      <alert type="danger" [dismissible]="true"
+             *ngIf="error"
+             (onClose)="clearError()">
+        <strong>Szent habakukk Micimakcó!</strong>
+        <p>{{error}}</p>
+
+      </alert>
 
       <!--<div class="alert alert-primary alert-dismissible fade show mt-2" role="alert">-->
       <!--<button type="button" class="close" data-dismiss="alert" aria-label="Close">-->
