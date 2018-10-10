@@ -12,6 +12,7 @@ import { AppRoutingModule} from './app-routing.module';
 import {EventService} from './shared/event.service';
 import {UserService} from './shared/user.service';
 import { TicketService } from './shared/ticket.service';
+import {LoggedInGuard} from './shared/logged-in.guard';
 
 
 @NgModule({
@@ -29,7 +30,7 @@ import { TicketService } from './shared/ticket.service';
     AppRoutingModule,
     AlertModule.forRoot(),
   ],
-  providers: [EventService, UserService, TicketService],
+  providers: [EventService, UserService, TicketService, LoggedInGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule {
