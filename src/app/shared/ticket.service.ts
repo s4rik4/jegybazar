@@ -1,8 +1,9 @@
+import { EventService } from './event.service';
+import { TicketModel } from './ticket-model';
+import { UserService } from './user.service';
 import {Injectable} from '@angular/core';
-import {EventService} from './event.service';
-import {UserService} from './user.service';
 
-@Injectable({})
+@Injectable()
 export class TicketService {
   private _tickets: TicketModel[];
 
@@ -96,6 +97,5 @@ export class TicketService {
 
   getEventNameById(id: number) {
     return this._eventService.getEventById(id).name;
-
-
   }
+}
