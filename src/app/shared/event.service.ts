@@ -91,5 +91,23 @@ export class EventService {
     return ev.length > 0 ? ev[0] : new EventModel(EventModel.emptyEvent);
   }
 
+  update(param: EventModel) {
+    this._events = this._events.map(ev => {
+      return ev.id === param.id ? {...param} : ev;
+    });
+  }
 
+  create(param: EventModel) {
+    this._events = [
+      ...this._events,
+      {
+        id: this._getMaxId() + 1,
+        ...param
+      }
+    ];
+  }
+
+  private _getMaxId() {
+    return this._events.reduce((x, y) => x.id > y.id ? x : y).id;
+  }
 }
