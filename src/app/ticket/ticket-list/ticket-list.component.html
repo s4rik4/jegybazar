@@ -12,8 +12,8 @@
       </form>
     </div>
 
-    <div class="my-2 my-lg-0 text-center">
-      <div>
+    <div class="my-2 my-lg-0 text-center" *ngIf="userService.isLoggedin">
+    <div>
         <label>Jegyet szeretnék létrehozni</label>
       </div>
       <div class="w-100"></div>
@@ -23,7 +23,7 @@
   </div>
 
   <!-- table -->
-  <table class="table table-responsive table-hover text-center mt-5">
+  <table class="table table-hover mt-5 table-responsive-sm">
 
     <thead>
     <tr>
@@ -35,7 +35,7 @@
     </tr>
     </thead>
 
-    <tbody>
+    <tbody class="text-center">
     <tr *ngFor="let ticket of tickets">
       <td scope="row">
         <a [routerLink]="['/event', ticket.eventId]">

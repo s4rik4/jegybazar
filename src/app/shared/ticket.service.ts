@@ -9,7 +9,30 @@ export class TicketService {
 
   constructor(private _eventService: EventService,
               private  _userService: UserService) {
+    this._tickets = this._getMockData();
+  }
+  getAllTickets() {
+    return this._tickets.map(ticket => {
+      return {
+        ...ticket,
+        event: this._eventService.getEventById(ticket.eventId),
+        seller: this._userService.getUserById(ticket.sellerUserId)
+      };
+    });
+  }
+
+  create(param: TicketModel) {
     this._tickets = [
+      ...this._tickets,
+      {
+        id: this._tickets.reduce((x, y) => x.id > y.id ? x : y).id + 1,
+        ...param
+      }
+    ];
+  }
+
+  private _getMockData() {
+    return [
       new TicketModel({
         'id': 1,
         'date': '2018-05-02',
@@ -83,19 +106,5 @@ export class TicketService {
         'sellerUserId': 3
       })
     ];
-  }
-
-  getAllTickets() {
-    return this._tickets.map(ticket => {
-      return {
-        ...ticket,
-        event: this._eventService.getEventById(ticket.eventId),
-        seller: this._userService.getUserById(ticket.sellerUserId)
-      };
-    });
-  }
-
-  getEventNameById(id: number) {
-    return this._eventService.getEventById(id).name;
   }
 }
