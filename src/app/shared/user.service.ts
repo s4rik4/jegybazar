@@ -45,7 +45,7 @@ export class UserService {
   }
 
   getUserById(id: number) {
-    const user = this._allUsers.filter(u => u.id === id);
+    const user = this._allUsers.filter(u => u.id === +id);
     return user.length > 0 ? user[0] : new UserModel(UserModel.emptyUser);
   }
   getCurrentUser() {
@@ -54,6 +54,14 @@ export class UserService {
 
   private _getMockData() {
     return [
+      new UserModel({
+        id: 0,
+        name: 'Legyek Réka Matlida',
+        email: 'legyekrekamatilda@valami.com',
+        address: 'Futrinka utca',
+        dateOfBirth: '2001.01.01',
+        gender: 'female'
+      }),
       new UserModel({
         'id': 1,
         'name': 'Pista ba',
