@@ -11,40 +11,85 @@
     </div>
     <!--card-body-->
     <div class="card-body">
-      <form #eventForm="ngForm" (ngSubmit)="onSubmit(eventForm.value)">
+      <form #eventForm="ngForm" (ngSubmit)="onSubmit()">
         <div class="form-group">
           <label for="esemeny">Esemény címe:</label>
-          <input type="text" class="form-control mb-3" id="esemeny"
+          <input type="text" id="esemeny"
+                 class="form-control mb-3"
                  placeholder="Esemény címe"
-                 [(ngModel)]="event.name" name="name">
+                 required
+                 [disabled]="!editForm"
+                 [(ngModel)]="event.name" name="name"
+                 #name="ngModel"
+          >
+          <alert type="danger" *ngIf="name.touched && name.invalid">
+            Kötelező mező!
+          </alert>
         </div>
 
         <div class="form-group">
           <label for="idopont">Esemény időpontja</label>
-          <input type="date" class="form-control mb-3" id="idopont" placeholder="Esemény időpontja"
-          [(ngModel)]="event.date" name="date" #tyup>
-          <!--<div>{{tyup.classList}}</div>-->
-          <!--<div>{{tyup.className}}</div>-->
-          <!--<hr>-->
-           <!--<div>{{eventForm.touched}}</div>-->
+          <input type="text" id="idopont"
+                 class="form-control mb-3"
+                 placeholder="Esemény időpontja"
+                 required
+                 [disabled]="!editForm"
+                 [(ngModel)]="event.date" name="date"
+                 #date="ngModel">
+          <alert type="danger" *ngIf="date.touched && date.invalid">
+            Kötelező mező!
+          </alert>
         </div>
 
         <div class="form-group">
           <div class="form-group mx-auto mt-3">
             <label for="eventPicUrl">Válassz képet az eseményhez</label>
-            <input type="text" class="form-control-file" id="eventPicUrl" placeholder="Eseményhez tartozó kép URL-je"
-                   [(ngModel)]="event.pictureURL" name="picUrl">
+            <input type="text" id="pictureUrl"
+                   class="form-control mb-3"
+                   placeholder="Eseményhez tartozo kep url-je"
+                   required
+                   [disabled]="!editForm"
+                   [(ngModel)]="event.pictureURL" name="picUrl"
+                   #picUrl="ngModel">
+            <alert type="danger" *ngIf="picUrl.touched && picUrl.invalid">
+              Kötelező mező!
+            </alert>
           </div>
         </div>
 
         <div class="form-group">
           <label for="leiras">Esemény leírása</label>
-          <textarea class="form-control" placeholder="Esemény leírása" id="leiras"
+          <textarea id="leiras"
+                    class="form-control"
+                    placeholder="Esemény leírása"
+                    required
+                    [disabled]="!editForm"
                     [(ngModel)]="event.description" name="description"
-          ></textarea>
+                    #description="ngModel">
+          </textarea>
+          <alert type="danger" *ngIf="description.touched && description.invalid">
+            Kötelező mező!
+          </alert>
         </div>
         <div class="text-center mb-3">
-          <input class="btn btn-primary btn-lg" type="submit" value="létrehozás">
+          <button type="submit"
+                  class="btn btn-primary btn-lg"
+                  *ngIf="editForm"
+                  value="létrehozás">Mentes
+          </button>
+          <button type="button"
+                  class="btn btn-primary btn-lg"
+                  *ngIf="!editForm && userService.isLoggedin"
+                  (click)="editForm = true">Szerkesztés
+          </button>
+          <button type="button"
+                  class="btn btn-primary btn-lg"
+                  *ngIf="!userService.isLoggedin"
+                  (click)="navigateBack()"
+          >Vissza
+          </button>
+
+
         </div>
       </form>
     </div>

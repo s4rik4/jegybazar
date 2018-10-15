@@ -1,6 +1,7 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {HomeComponent} from './home/home.component';
+import {LoggedInGuard} from './shared/logged-in.guard';
 import {PageNotFoundComponent} from './core/page-not-found/page-not-found.component';
 import {EventComponent} from './event/event.component';
 import {TicketComponent} from './ticket/ticket.component';
@@ -14,7 +15,6 @@ import {ProfileEditComponent} from './user/profile-edit/profile-edit.component';
 import {TicketListComponent} from './ticket/ticket-list/ticket-list.component';
 import {TicketDetailComponent} from './ticket/ticket-detail/ticket-detail.component';
 import {BidComponent} from './ticket/bid/bid.component';
-import {LoggedInGuard} from './shared/logged-in.guard';
 
 const routes: Routes = [
   {path: 'home', component: HomeComponent},
@@ -23,7 +23,7 @@ const routes: Routes = [
     children: [
       {path: '', component: EventListComponent},
       {path: 'new', component: EventDetailComponent, canActivate: [LoggedInGuard]},
-      {path: ':id', component: EventDetailComponent, canActivate: [LoggedInGuard]}
+      {path: ':id', component: EventDetailComponent}
     ]
   },
   {
