@@ -7,7 +7,6 @@ import {EventComponent} from './event/event.component';
 import {TicketComponent} from './ticket/ticket.component';
 import {AboutComponent} from './about/about.component';
 import {LoginComponent} from './user/login/login.component';
-import {RegistrationComponent} from './user/registration/registration.component';
 import {EventListComponent} from './event/event-list/event-list.component';
 import {EventDetailComponent} from './event/event-detail/event-detail.component';
 import {ProfileComponent} from './user/profile/profile.component';
@@ -39,8 +38,7 @@ const routes: Routes = [
     path: 'user', children: [
       {path: '', component: ProfileComponent, canActivate: [LoggedInGuard]},
       {path: 'edit', component: ProfileEditComponent, canActivate: [LoggedInGuard]},
-      {path: 'login', component: LoginComponent},
-      {path: 'registration', component: RegistrationComponent}
+      {path: 'login', component: LoginComponent}
     ]
   },
   {path: '', redirectTo: '/home', pathMatch: 'full'},
@@ -66,7 +64,6 @@ export class AppRoutingModule {
     BidComponent,
     AboutComponent,
     LoginComponent,
-    RegistrationComponent,
     ProfileComponent,
     ProfileEditComponent
   ];
