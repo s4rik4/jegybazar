@@ -30,3 +30,4 @@ export class ProfileEditComponent implements OnInit {
       this._router.navigate(['/user']);
   }
 }
+}
