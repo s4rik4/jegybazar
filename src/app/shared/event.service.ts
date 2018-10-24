@@ -1,5 +1,9 @@
 import {Injectable} from '@angular/core';
 import {EventModel} from './event-model';
+import {HttpClient} from '@angular/common/http';
+import {Observable} from 'rxjs';
+import {environment} from '../../environments/environment';
+import {map} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -7,8 +11,42 @@ import {EventModel} from './event-model';
 export class EventService {
   private _events: EventModel[];
 
-  constructor() {
-    this._events = [
+  constructor(private _http: HttpClient) {
+    this._events = this._getMockData();
+  }
+
+  create(param: EventModel) {
+    // this._events = [
+    //   ...this._events,
+    //   {
+    //     id: this._getMaxId() + 1,
+    //     ...param
+    //   }
+    // ];
+  }
+
+  getAllEvents(): Observable<EventModel[]> {
+    this._http.get(`${environment.firebase.baseUrl}/events.json`).pipe(map(data => Object.values(data)));
+  }
+
+  getEventById(id: number) {
+    const ev = this._events.filter(x => x.id === +id);
+    return ev.length > 0 ? ev[0] : new EventModel(EventModel.emptyEvent);
+  }
+
+  update(param: EventModel) {
+    this._events = this._events.map(ev => {
+      return ev.id === param.id ? {...param} : ev;
+    });
+  }
+
+
+  private _getMaxId() {
+    return this._events.reduce((x, y) => x.id > y.id ? x : y).id;
+  }
+
+  private _getMockData() {
+    return [
       new EventModel({
         'id': 1,
         'name': 'Sziget Fesztivál',
@@ -80,34 +118,5 @@ export class EventService {
         'description': 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis, necessitatibus.'
       }),
     ];
-  }
-
-  getAllEvents(): EventModel[] {
-    return this._events;
-  }
-
-  getEventById(id: number) {
-    const ev = this._events.filter(x => x.id === +id);
-    return ev.length > 0 ? ev[0] : new EventModel(EventModel.emptyEvent);
-  }
-
-  update(param: EventModel) {
-    this._events = this._events.map(ev => {
-      return ev.id === param.id ? {...param} : ev;
-    });
-  }
-
-  create(param: EventModel) {
-    this._events = [
-      ...this._events,
-      {
-        id: this._getMaxId() + 1,
-        ...param
-      }
-    ];
-  }
-
-  private _getMaxId() {
-    return this._events.reduce((x, y) => x.id > y.id ? x : y).id;
   }
 }

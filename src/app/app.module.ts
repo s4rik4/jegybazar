@@ -1,6 +1,5 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
-
 import {AppComponent} from './app.component';
 import {AlertModule} from 'ngx-bootstrap';
 import {CollapseModule} from 'ngx-bootstrap/collapse';
@@ -14,6 +13,7 @@ import {UserService} from './shared/user.service';
 import {TicketService} from './shared/ticket.service';
 import {LoggedInGuard} from './shared/logged-in.guard';
 import {FormsModule} from '@angular/forms';
+import {HttpClientModule} from '@angular/common/http';
 
 
 @NgModule({
@@ -31,6 +31,7 @@ import {FormsModule} from '@angular/forms';
     CollapseModule.forRoot(),
     AppRoutingModule,
     AlertModule.forRoot(),
+    HttpClientModule
   ],
   providers: [EventService, UserService, TicketService, LoggedInGuard],
   bootstrap: [AppComponent]
